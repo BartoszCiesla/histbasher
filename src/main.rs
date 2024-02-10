@@ -34,8 +34,7 @@ fn main() -> anyhow::Result<()> {
 
     let local_timezone = Local::now().timezone();
 
-    for line in reader.lines() {
-        let line = line.context("Could not read line")?;
+    for line in reader.lines().map_while(Result::ok) {
         input_lines += 1;
         if let Some(captures) = regex.captures(&line) {
             let timestamp = captures
