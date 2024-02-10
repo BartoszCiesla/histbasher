@@ -1,0 +1,28 @@
+[package]
+name = "histbasher"
+version = "0.1.0"
+edition = "2021"
+authors = ["bartosz.ciesla@gmail.com"]
+
+[lints.rust]
+unsafe_code = "deny"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+enum_glob_use = "deny"
+pedantic = "deny"
+nursery = "deny"
+
+[profile.release]
+opt-level = 'z'
+lto = "fat"
+codegen-units = 1
+panic = 'abort'
+strip = "symbols"
+
+[dependencies]
+clap = { version = "4.5.0", features = ["derive"] }
+regex = "1.10.3"
+chrono = "0.4.33"
+anyhow = "1.0.79"
